@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Callside Sales Team Training</title>
+<meta name="description" content="Callside trains B2B sales teams on live calls to real prospects, and works with only one sales team per industry.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'%3E%3Ccircle cx='22' cy='22' r='22' fill='%232F5BFF'/%3E%3Cpath d='M28.6 15.3a9.4 9.4 0 1 0 0 13.4' fill='none' stroke='%23fff' stroke-width='4.4' stroke-linecap='round'/%3E%3Ccircle cx='30.2' cy='22' r='2.7' fill='%23FF6B3D'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script>
+/* Turn entrance motion on only when it can run, and never leave content hidden if the main script fails. */
+(function () {
+  var d = document.documentElement;
+  var m = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+  if ('IntersectionObserver' in window && !(m && m.matches)) {
+    d.classList.add('motion');
+    window.__revealGuard = setTimeout(function () { d.classList.remove('motion'); }, 4000);
+  }
+})();
+</script>
+<style>
+/* ---------- Tokens (from the Figma variables, collection "Callside") ---------- */
+:root {
+  /* Layout: open dark page, 1280 px content column, headlines set straight on the page,
+     one light panel (results) and one blue panel (booking) to break the dark ground. */
+  --bg: #0A0B0E;
+  --raised: #14161B;
+  --paper: #F2F1EC;
+  --blue: #2F5BFF;
+  --blue-soft: rgba(47, 91, 255, .16);
+  --signal: #FF6B3D;
+  --text: #FFFFFF;
+  --text-2: rgba(255, 255, 255, .66);
+  --muted: #8D919B;
+  --accent: #8FA5FF;
+  --ink: #0B0C0F;
+  --ink-2: rgba(11, 12, 15, .64);
+  --line: rgba(255, 255, 255, .11);
+  --line-strong: rgba(255, 255, 255, .26);
+  --line-ink: rgba(11, 12, 15, .14);
+
+  --font-display: "Instrument Sans", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --r-card: 24px;
+  --r-photo: 28px;
+  --r-panel: 40px;
+  --gap: 24px;
+  --page-x: clamp(20px, 5.56vw, 80px);
+  --panel-x: clamp(12px, 2.78vw, 40px);
+  --section: clamp(96px, 11.1vw, 160px);
+
+  /* Motion. Controls (hover, menus, accordions) stay on the short scale.
+     Entrance reveals are longer on purpose: this is a marketing page and the brief asks for smooth appearing motion. */
+  --motion-150: 150ms;
+  --motion-200: 200ms;
+  --motion-300: 300ms;
+  --reveal: 720ms;
+  --reveal-long: 900ms;
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+}
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 88px; color-scheme: dark; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 400 .9375rem/1.55 var(--font-body); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+h1, h2, h3, h4, p, ul, ol, figure, blockquote { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip { position: absolute; left: 16px; top: -60px; z-index: 100; background: var(--paper); color: var(--ink); padding: 12px 16px; border-radius: 12px; }
+.skip:focus { top: 16px; }
+main:focus { outline: none; }
+.only-m { display: none; }
+
+.page { position: relative; }
+.glow { position: absolute; top: 0; right: 0; width: min(980px, 72vw); height: 660px; pointer-events: none; background: radial-gradient(ellipse 62% 70% at 82% 0%, rgba(47, 91, 255, .46), rgba(47, 91, 255, 0) 70%); }
+.wrap { width: 100%; max-width: calc(1280px + 2 * var(--page-x)); margin-inline: auto; padding-inline: var(--page-x); }
+.wrap--panel { max-width: calc(1360px + 2 * var(--panel-x)); padding-inline: var(--panel-x); }
+.sec { padding-top: var(--section); }
+
+/* ---------- Type ---------- */
+.display { font: 500 clamp(2.75rem, 6.67vw, 6rem)/1 var(--font-display); letter-spacing: -.04em; text-wrap: balance; }
+.h1 { font: 500 clamp(2.125rem, 4.17vw, 3.75rem)/1.06 var(--font-display); letter-spacing: -.035em; text-wrap: balance; }
+.h2 { font: 500 clamp(1.75rem, 2.78vw, 2.5rem)/1.1 var(--font-display); letter-spacing: -.03em; }
+.h3 { font: 500 clamp(1.3125rem, 1.8vw, 1.625rem)/1.23 var(--font-display); letter-spacing: -.02em; text-wrap: balance; }
+.quote { font: 500 clamp(1.5rem, 2.36vw, 2.125rem)/1.29 var(--font-display); letter-spacing: -.025em; }
+.stat { font: 500 clamp(3.75rem, 5.83vw, 5.25rem)/.93 var(--font-display); letter-spacing: -.045em; }
+.h4 { font: 500 clamp(1.0625rem, 1.32vw, 1.1875rem)/1.35 var(--font-body); letter-spacing: -.015em; }
+.lead { font-size: clamp(1.0625rem, 1.39vw, 1.25rem); line-height: 1.5; letter-spacing: -.01em; color: var(--text-2); text-wrap: pretty; }
+.body-l { font-size: clamp(1rem, 1.18vw, 1.0625rem); line-height: 1.55; text-wrap: pretty; }
+.body { font-size: .9375rem; line-height: 1.55; text-wrap: pretty; }
+.label { font: 500 .75rem/1 var(--font-body); letter-spacing: .08em; text-transform: uppercase; }
+.accent { color: var(--accent); }
+.dim { color: var(--text-2); }
+.muted { color: var(--muted); }
+[data-count] { font-variant-numeric: tabular-nums; }
+
+/* ---------- Components ---------- */
+.ico { width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.ico--18 { width: 18px; height: 18px; }
+.ico--24 { width: 24px; height: 24px; }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 16px; height: 56px; padding: 0 8px 0 26px; border: 0; border-radius: 100px; font: 500 .9375rem/1 var(--font-body); letter-spacing: -.01em; text-decoration: none; white-space: nowrap; cursor: pointer; }
+.btn__disc { width: 40px; height: 40px; flex: none; display: grid; place-items: center; border-radius: 50%; background: var(--blue); color: #fff; transition: transform var(--motion-200) var(--ease-out); }
+.btn--primary { background: var(--paper); color: var(--ink); }
+.btn--dark { background: var(--ink); color: #fff; }
+.btn--secondary { padding: 0 26px; background: none; color: #fff; border: 1px solid var(--line-strong); transition: border-color var(--motion-150); }
+.btn--play { padding: 0 26px 0 8px; gap: 14px; background: none; color: #fff; border: 1px solid var(--line-strong); transition: border-color var(--motion-150); }
+.btn--play .btn__disc { background: rgba(255, 255, 255, .12); }
+.btn--nav { height: 44px; padding: 0 20px; background: var(--paper); color: var(--ink); }
+@media (hover: hover) {
+  .btn:hover .btn__disc { transform: translateX(3px); }
+  .btn--play:hover .btn__disc { transform: scale(1.06); }
+  .btn--secondary:hover, .btn--play:hover { border-color: rgba(255, 255, 255, .6); }
+}
+
+.eyebrow { display: inline-flex; align-items: center; gap: 8px; height: 34px; padding: 0 16px 0 12px; border: 1px solid var(--line); border-radius: 100px; background: rgba(255, 255, 255, .04); color: var(--text-2); }
+.eyebrow::before, .note::before { content: ""; flex: none; border-radius: 50%; background: var(--signal); }
+.eyebrow::before { width: 6px; height: 6px; }
+.eyebrow--light { border-color: var(--line-ink); background: none; color: var(--ink-2); }
+.eyebrow--on-blue { border-color: rgba(255, 255, 255, .35); background: rgba(255, 255, 255, .1); color: rgba(255, 255, 255, .95); }
+.note { display: inline-flex; align-items: center; gap: 10px; color: var(--text-2); }
+.note::before { width: 8px; height: 8px; }
+.tag { display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border: 1px solid rgba(255, 255, 255, .2); border-radius: 100px; background: rgba(0, 0, 0, .45); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); color: #fff; }
+.glass { border: 1px solid rgba(255, 255, 255, .16); background: rgba(0, 0, 0, .52); -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px); }
+.icon-btn { width: 48px; height: 48px; flex: none; display: grid; place-items: center; border: 1px solid var(--line-strong); border-radius: 50%; background: none; color: #fff; }
+.pm { position: relative; width: 18px; height: 18px; }
+.pm::before, .pm::after { content: ""; position: absolute; left: 1px; right: 1px; top: 50%; height: 1.6px; margin-top: -.8px; border-radius: 1px; background: currentColor; }
+.pm::after { transform: rotate(90deg); transition: transform var(--motion-200) var(--ease-out); }
+[aria-expanded="true"] .pm::after { transform: none; }
+.avatar { width: 56px; height: 56px; flex: none; border-radius: 50%; object-fit: cover; }
+.person { display: flex; align-items: center; gap: 16px; }
+.person > span { display: grid; gap: 4px; }
+.photo { position: relative; overflow: hidden; border-radius: var(--r-photo); background: var(--raised); }
+.photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform var(--motion-300) var(--ease-out); }
+@media (hover: hover) { .photo--zoom:hover img { transform: scale(1.03); } }
+.photo .tag { position: absolute; z-index: 1; }
+
+.sec-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px 60px; }
+.sec-head__main { display: flex; flex-direction: column; align-items: flex-start; gap: 24px; max-width: 800px; }
+.sec-head__side { max-width: 380px; color: var(--text-2); }
+.sec-head--center { justify-content: center; text-align: center; }
+.sec-head--center .sec-head__main { align-items: center; }
+.sec-body { margin-top: 72px; }
+.actions { display: flex; align-items: center; flex-wrap: wrap; gap: 20px 24px; }
+
+/* ---------- Header ---------- */
+.site-header { position: sticky; top: 0; z-index: 50; }
+.site-header::before { content: ""; position: absolute; inset: 0; border-bottom: 1px solid var(--line); background: rgba(10, 11, 14, .78); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); opacity: 0; transition: opacity var(--motion-200); }
+.site-header.is-stuck::before, .site-header.is-open::before { opacity: 1; }
+.site-header__in { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 100px; transition: none; }
+.logo { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font: 600 1.4375rem/1 var(--font-display); letter-spacing: -.03em; }
+.logo svg { width: 44px; height: 44px; }
+.nav { display: flex; gap: 40px; }
+.nav a { color: var(--text-2); font-weight: 500; letter-spacing: -.01em; text-decoration: none; transition: color var(--motion-150); }
+.nav a:hover { color: #fff; }
+.menu-btn { display: none; cursor: pointer; }
+.menu-btn .ico--close, .menu-btn[aria-expanded="true"] .ico--menu { display: none; }
+.menu-btn[aria-expanded="true"] .ico--close { display: block; }
+.mobile-menu { position: absolute; left: 0; right: 0; top: 100%; padding: 8px var(--page-x) 28px; border-bottom: 1px solid var(--line); background: rgba(10, 11, 14, .96); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); }
+.mobile-menu:not([hidden]) { animation: drop-in var(--motion-200) var(--ease-out) both; }
+.mobile-menu a:not(.btn) { display: block; padding: 18px 0; border-bottom: 1px solid var(--line); text-decoration: none; }
+.mobile-menu .btn { width: 100%; margin-top: 24px; }
+@keyframes drop-in { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+
+/* ---------- 01 Hero ---------- */
+.hero { position: relative; }
+.hero__head { display: flex; flex-direction: column; align-items: flex-start; gap: 32px; padding-top: 84px; }
+.hero__intro { display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; margin-top: 44px; }
+.hero__copy { max-width: 580px; }
+.hero__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+.status { margin-top: 14px; color: var(--text-2); }
+.proof { flex: none; display: flex; flex-direction: column; align-items: flex-end; gap: 16px; text-align: right; color: var(--text-2); }
+.proof__faces { display: flex; flex: none; }
+.proof__faces img { flex: none; width: 48px; height: 48px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 3px var(--bg); }
+.proof__faces img + img { margin-left: -12px; }
+.hero__media { margin-top: 72px; aspect-ratio: 1280 / 600; }
+.hero__media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0, 0, 0, .18), rgba(0, 0, 0, 0) 45%, rgba(0, 0, 0, .6)); }
+.hero__media .tag { top: 28px; left: 28px; }
+.live, .hero-stat { position: absolute; z-index: 1; bottom: 28px; border-radius: 20px; }
+.live { left: 28px; width: 380px; padding: 20px; display: grid; gap: 16px; }
+.live__top { display: flex; justify-content: space-between; align-items: center; }
+.live__top .note { color: #fff; }
+.wave { display: flex; align-items: center; gap: 4px; height: 40px; overflow: hidden; }
+.wave i { flex: none; width: 4px; border-radius: 2px; background: rgba(255, 255, 255, .92); transition: transform 600ms var(--ease-out); transition-delay: calc(var(--d, 0ms) + 260ms + var(--i, 0) * 14ms); }
+.wave i.is-signal { background: var(--signal); }
+.wave i.is-dim { background: rgba(255, 255, 255, .3); }
+.hero-stat { right: 28px; padding: 20px 24px; display: grid; gap: 6px; }
+.hero-stat p + p { max-width: 170px; color: var(--text-2); }
+
+/* ---------- 02 Clients ---------- */
+.clients { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px 40px; padding-top: 56px; }
+.clients__label { max-width: 150px; color: var(--muted); }
+.logos { display: contents; color: var(--muted); font-size: 16px; }
+.logos li { display: flex; align-items: center; gap: 10px; white-space: nowrap; }
+.logos .l1 { font-weight: 700; font-size: 1.5625em; letter-spacing: -.05em; }
+.logos .l2 { font-weight: 500; font-size: 1.375em; letter-spacing: -.04em; }
+.logos .l3 { font-weight: 600; font-size: 1.0625em; letter-spacing: .22em; }
+.logos .l4 { font-weight: 300; font-size: 1.5em; letter-spacing: -.03em; }
+.logos .l5 { font-weight: 400; font-size: 1.25em; letter-spacing: -.03em; }
+
+/* ---------- Accordions (questions, FAQ) ---------- */
+.acc { border-top: 1px solid var(--line); }
+.acc:last-child { border-bottom: 1px solid var(--line); }
+.acc__btn { display: flex; align-items: center; gap: 28px; width: 100%; padding: 30px 0; border: 0; background: none; text-align: left; cursor: pointer; }
+.acc__btn .num { color: var(--muted); }
+.acc__btn .h3 { flex: 1; }
+.acc__btn .icon-btn { transition: border-color var(--motion-150), background-color var(--motion-150); }
+.acc__btn:hover .icon-btn, .acc__btn[aria-expanded="true"] .icon-btn { border-color: rgba(255, 255, 255, .6); }
+.acc__panel { padding: 0 76px 30px 0; color: var(--text-2); max-width: 760px; }
+.acc__panel.has-num { padding-left: 44px; }
+.acc__panel:not([hidden]) { animation: drop-in var(--motion-200) var(--ease-out) both; }
+
+/* ---------- 03 Questions ---------- */
+.split { display: grid; grid-template-columns: minmax(0, 480px) minmax(0, 1fr); grid-template-rows: auto 1fr; grid-template-areas: "intro list" "actions list"; column-gap: 80px; }
+.split__intro { grid-area: intro; display: flex; flex-direction: column; align-items: flex-start; gap: 28px; }
+.split__intro .body-l { max-width: 420px; color: var(--text-2); }
+.split__actions { grid-area: actions; display: flex; flex-direction: column; align-items: flex-start; gap: 24px; margin-top: 40px; }
+.split__list { grid-area: list; }
+
+/* ---------- 04 Programme ---------- */
+.programme { display: grid; grid-template-columns: minmax(0, 440px) minmax(0, 1fr); gap: 80px; }
+.programme .photo { aspect-ratio: 440 / 600; }
+.programme .photo .tag { left: 24px; bottom: 24px; }
+.modules { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(6, auto); grid-auto-flow: column; column-gap: 40px; align-content: start; }
+.modules li { display: flex; align-items: center; gap: 20px; min-height: 100px; padding: 14px 0; border-top: 1px solid var(--line); }
+.modules li:nth-child(6n) { border-bottom: 1px solid var(--line); }
+.modules .label { color: var(--accent); }
+
+/* ---------- 05 System ---------- */
+.cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); }
+.card { display: flex; flex-direction: column; justify-content: space-between; gap: 32px; min-height: 330px; padding: 36px; border: 1px solid var(--line); border-radius: var(--r-card); background: var(--raised); transition: border-color var(--motion-150); }
+@media (hover: hover) { .card:hover { border-color: var(--line-strong); } }
+.card__top { display: flex; justify-content: space-between; align-items: flex-start; color: var(--muted); }
+.card__tile { width: 56px; height: 56px; display: grid; place-items: center; border-radius: 16px; background: var(--blue-soft); color: var(--accent); }
+.card__text { display: grid; gap: 12px; }
+.card__text .body { color: var(--text-2); }
+.card--blue { border-color: transparent; background: var(--blue); }
+.card--blue .card__top { color: rgba(255, 255, 255, .7); }
+.card--blue .card__tile { background: rgba(255, 255, 255, .18); color: #fff; }
+.card--blue .card__text .body { color: rgba(255, 255, 255, .82); }
+
+/* ---------- 06 Results ---------- */
+.panel { border-radius: var(--r-panel); }
+.panel--paper { display: grid; gap: 80px; padding: 88px 80px; background: var(--paper); color: var(--ink); }
+.panel--paper :focus-visible { outline-color: var(--blue); }
+.panel--paper .accent { color: var(--blue); }
+.panel--paper .sec-head__main .body-l { max-width: 420px; color: var(--ink-2); }
+.panel--paper .photo { width: 460px; max-width: 100%; aspect-ratio: 460 / 300; border-radius: var(--r-card); flex: none; }
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.stats > div { display: grid; align-content: start; gap: 16px; padding: 6px 28px; border-left: 1px solid var(--line-ink); color: var(--ink-2); }
+.stats > div:first-child { padding-left: 0; border-left: 0; }
+.stats .stat { color: var(--ink); }
+.stats > div:first-child .stat { color: var(--blue); }
+
+/* ---------- 07 Process ---------- */
+.steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gap); }
+.step { display: grid; gap: 28px; align-content: start; }
+.step__marker { display: flex; align-items: center; gap: 16px; }
+.step__num { width: 48px; height: 48px; flex: none; display: grid; place-items: center; border: 1px solid var(--line-strong); border-radius: 50%; }
+.step--now .step__num { border-color: var(--blue); background: var(--blue); }
+.step__line { flex: 1; height: 1px; background: var(--line); transform-origin: left top; }
+.step__body { display: grid; gap: 12px; padding-right: 24px; }
+.step__body .label { color: var(--accent); }
+.step__body .body { color: var(--text-2); }
+
+/* ---------- 08 Case studies ---------- */
+.cases-head { display: grid; grid-template-columns: 1fr auto; grid-template-areas: "head btn" "grid grid"; align-items: end; row-gap: 72px; }
+.cases-head .sec-head__main { grid-area: head; }
+.cases-head > .btn { grid-area: btn; }
+.cases { grid-area: grid; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); }
+.case { display: grid; gap: 24px; align-content: start; }
+.case .photo { aspect-ratio: 411 / 470; border-radius: var(--r-card); }
+.case .photo .tag { top: 20px; left: 20px; }
+.case__text { display: grid; gap: 12px; padding-right: 24px; }
+.case__text .body { color: var(--text-2); }
+
+/* ---------- 09 Testimonials ---------- */
+.featured { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 400px); gap: 80px; align-items: end; }
+.featured figure { display: grid; gap: 40px; }
+.result { display: grid; gap: 24px; padding: 32px; border: 1px solid var(--line); border-radius: var(--r-card); background: var(--raised); }
+.result__top { display: grid; gap: 10px; }
+.result hr { width: 100%; height: 1px; margin: 0; border: 0; background: var(--line); }
+.result dl { display: grid; gap: 24px; margin: 0; }
+.result dt { margin-bottom: 8px; color: var(--muted); }
+.result dd { margin: 0; color: var(--text-2); }
+.voices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--gap); margin-top: 72px; }
+.voices .card { min-height: 290px; }
+
+/* ---------- 10 Founder ---------- */
+.founder { display: grid; grid-template-columns: minmax(0, 520px) minmax(0, 1fr); gap: 80px; align-items: center; }
+.founder .photo { aspect-ratio: 520 / 700; }
+.founder__name { position: absolute; z-index: 1; left: 24px; bottom: 24px; display: grid; gap: 8px; padding: 14px 18px; border-radius: 16px; }
+.founder__name .label { color: var(--text-2); }
+.founder__text { display: flex; flex-direction: column; align-items: flex-start; gap: 32px; }
+.founder__text .prose { display: grid; gap: 18px; max-width: 600px; color: var(--text-2); }
+.facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; width: 100%; padding-top: 28px; border-top: 1px solid var(--line); }
+.facts > div { display: grid; gap: 10px; }
+.facts .label { color: var(--muted); line-height: 1.4; }
+
+/* ---------- 11 FAQ ---------- */
+.faq { width: min(880px, 100%); margin: 64px auto 0; }
+.faq .acc__btn { padding: 28px 0; }
+
+/* ---------- 12 Contact ---------- */
+.panel--blue { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 440px); gap: 64px; align-items: center; padding: 72px 72px 72px 80px; background: var(--blue); }
+.panel--blue :focus-visible { outline-color: #fff; }
+.cta { display: flex; flex-direction: column; align-items: flex-start; gap: 36px; }
+.cta .soft { color: rgba(255, 255, 255, .62); }
+.cta .lead { max-width: 520px; color: rgba(255, 255, 255, .86); }
+.cta .note { color: rgba(255, 255, 255, .86); }
+.booking { display: grid; gap: 20px; padding: 28px; border-radius: var(--r-photo); background: var(--paper); color: var(--ink); scroll-margin-top: 110px; }
+.booking :focus-visible { outline-color: var(--blue); }
+.booking__top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.booking__top > div:first-child { display: grid; gap: 10px; }
+.booking .label { color: var(--ink-2); }
+.cal__nav { display: flex; gap: 6px; }
+.cal__nav button { width: 40px; height: 40px; display: grid; place-items: center; border: 1px solid var(--line-ink); border-radius: 50%; background: none; color: var(--ink); cursor: pointer; transition: border-color var(--motion-150); }
+.cal__nav button:hover { border-color: rgba(11, 12, 15, .4); }
+.cal__wd, .cal__grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); }
+.cal__wd span { height: 32px; display: grid; place-items: center; }
+.cal__wd b { font-weight: inherit; }
+.cal__grid { row-gap: 2px; }
+.cal__day { height: 44px; display: grid; place-items: center; padding: 0; border: 0; background: none; color: var(--ink); font: 400 .9375rem/1 var(--font-body); cursor: pointer; }
+.cal__day span { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; transition: background-color var(--motion-150), color var(--motion-150); }
+.cal__day:hover:not(:disabled):not(.is-sel) span { background: rgba(11, 12, 15, .07); }
+.cal__day.is-sel span { background: var(--blue); color: #fff; }
+.cal__day:disabled { color: rgba(11, 12, 15, .45); cursor: default; }
+.cal__day.is-out { color: rgba(11, 12, 15, .25); }
+.booking hr { width: 100%; height: 1px; margin: 0; border: 0; background: var(--line-ink); }
+.booking__times { display: grid; gap: 14px; }
+.booking__times .label { line-height: 1.4; }
+.slots { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.slot { height: 42px; border: 1px solid var(--line-ink); border-radius: 100px; background: none; color: var(--ink); font: 500 .9375rem/1 var(--font-body); cursor: pointer; transition: background-color var(--motion-150), border-color var(--motion-150), color var(--motion-150); }
+.slot:hover { border-color: rgba(11, 12, 15, .4); }
+.slot[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: #fff; }
+.booking .btn { justify-self: start; }
+.booking__status { color: var(--ink-2); }
+.booking__status:not([hidden]) { animation: fade-in var(--motion-200) both; }
+
+/* ---------- Footer ---------- */
+.site-footer { padding-top: clamp(72px, 9.7vw, 140px); overflow: hidden; }
+.site-footer__top { display: flex; justify-content: space-between; gap: 48px; }
+.site-footer__brand { display: grid; gap: 22px; align-content: start; max-width: 320px; color: var(--text-2); }
+.site-footer__brand .logo { color: #fff; }
+.site-footer__cols { display: flex; gap: clamp(40px, 6.7vw, 96px); }
+.site-footer__cols h3 { margin-bottom: 16px; color: var(--muted); }
+.site-footer__cols li { white-space: nowrap; }
+.site-footer__cols li + li { margin-top: 16px; }
+.site-footer__cols a { text-decoration: none; transition: color var(--motion-150); }
+.site-footer__cols a:hover { color: var(--accent); }
+.legal { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px 24px; margin-top: 64px; padding-top: 28px; border-top: 1px solid var(--line); color: var(--muted); }
+.legal ul { display: flex; gap: 28px; }
+.legal a { text-decoration: none; }
+.legal a:hover { color: #fff; }
+.wordmark { margin: 56px 0 -.1em; font: 600 min(25.9vw, 374px)/.92 var(--font-display); letter-spacing: -.05em; white-space: nowrap; background: linear-gradient(180deg, rgba(255, 255, 255, .3), rgba(255, 255, 255, .02)); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-user-select: none; user-select: none; }
+
+/* ---------- Entrance motion (only while html has .motion) ---------- */
+.w { display: inline-block; overflow: hidden; vertical-align: top; padding: .08em .05em .17em; margin: -.08em -.05em -.17em; }
+.w__i { display: inline-block; transition: transform var(--reveal-long) var(--ease-out); transition-delay: calc(var(--d, 0ms) + var(--i, 0) * var(--ws, 45ms)); }
+.motion [data-reveal=""]:not(.is-in) { opacity: 0; transform: translateY(22px); }
+.motion [data-reveal="card"]:not(.is-in) { opacity: 0; transform: translateY(34px) scale(.985); }
+.motion [data-reveal="fade"]:not(.is-in) { opacity: 0; }
+.motion [data-reveal="photo"]:not(.is-in) { opacity: 0; transform: translateY(30px); }
+.motion [data-reveal="photo"]:not(.is-in) img { transform: scale(1.09); }
+.motion [data-reveal="line"]:not(.is-in) { transform: var(--line-hidden, scaleX(0)); }
+.motion [data-reveal="words"]:not(.is-split):not(.is-in) { opacity: 0; }
+.motion [data-reveal="words"]:not(.is-in) .w__i { transform: translateY(118%); }
+.motion [data-reveal]:not(.is-in) .wave i { transform: scaleY(.15); }
+.motion [data-reveal].is-in { transition: opacity var(--reveal) var(--ease-out) var(--d, 0ms), transform var(--reveal) var(--ease-out) var(--d, 0ms); }
+.motion [data-reveal="photo"].is-in img { transition: transform 1300ms var(--ease-out) var(--d, 0ms); }
+.motion [data-reveal="line"].is-in { transition-duration: 1000ms; }
+
+/* ---------- Tablet ---------- */
+@media (max-width: 1100px) {
+  .sec-head { flex-direction: column; align-items: flex-start; }
+  .sec-head--center { align-items: center; }
+  .sec-head__side { max-width: 560px; }
+  .panel--paper .photo { width: 100%; aspect-ratio: 16 / 9; }
+  .clients { justify-content: flex-start; gap: 24px 44px; }
+  .clients__label { flex-basis: 100%; max-width: none; }
+  .split { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; grid-template-areas: "intro" "list" "actions"; row-gap: 40px; }
+  .split__actions { margin-top: 0; }
+  .programme { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+  .programme .photo { aspect-ratio: 16 / 9; }
+  .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .panel--paper { gap: 56px; padding: 64px 48px; }
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 40px; }
+  .stats > div:nth-child(odd) { padding-left: 0; border-left: 0; }
+  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 48px; }
+  .featured { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  .founder { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  .founder .photo { width: min(520px, 100%); }
+  .panel--blue { grid-template-columns: minmax(0, 1fr); gap: 48px; padding: 64px 48px; }
+  .booking { width: min(480px, 100%); }
+}
+@media (max-width: 960px) {
+  .nav, .nav-cta { display: none; }
+  .menu-btn { display: grid; }
+  .site-header__in { height: 76px; }
+  .hero-stat { display: none; }
+  .site-footer__top { flex-direction: column; gap: 40px; }
+  .site-footer__cols { justify-content: space-between; }
+  .mobile-menu { height: calc(100vh - 76px); height: calc(100dvh - 76px); overflow-y: auto; }
+  .hero__media { aspect-ratio: 16 / 10; }
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 720px) {
+  html { scroll-padding-top: 84px; }
+  .only-d, .br-d { display: none; }
+  .only-m { display: inline; }
+  .logo svg { width: 44px; height: 44px; }
+  .sec-head { flex-direction: column; align-items: flex-start; gap: 20px; text-align: left; }
+  .sec-head__main, .sec-head--center .sec-head__main { align-items: flex-start; gap: 20px; }
+  .sec-head__side { max-width: none; }
+  .sec-body { margin-top: 36px; }
+  .btn--wide { width: 100%; }
+  .acc__btn { gap: 14px; padding: 20px 0; }
+  .acc__panel { padding: 0 0 22px; }
+  .acc__panel.has-num { padding-left: 30px; }
+  .avatar { width: 48px; height: 48px; }
+  .person { gap: 14px; }
+
+  .hero__head { gap: 22px; padding-top: 40px; }
+  .display { line-height: 1.02; }
+  .hero__intro { flex-direction: column; align-items: stretch; gap: 28px; margin-top: 22px; }
+  .hero__actions { flex-direction: column; margin-top: 28px; }
+  .hero__actions .btn { width: 100%; }
+  .proof { flex-direction: row; align-items: center; gap: 14px; text-align: left; }
+  .proof__faces img { width: 40px; height: 40px; }
+  .proof__faces img + img { margin-left: -10px; }
+  .hero__media { margin-top: 36px; aspect-ratio: auto; height: 440px; border-radius: var(--r-card); }
+  .hero__media .tag { top: 16px; left: 16px; }
+  .live { left: 16px; right: 16px; bottom: 16px; width: auto; padding: 16px; gap: 14px; border-radius: 18px; }
+  .wave { height: 36px; }
+
+  .clients { flex-direction: column; align-items: flex-start; gap: 20px; padding-top: 40px; }
+  .clients__label { max-width: none; }
+  .logos { display: flex; flex-wrap: wrap; gap: 20px 28px; font-size: 13.5px; }
+  .logos .ico--24 { width: 20px; height: 20px; }
+
+  .split { row-gap: 36px; }
+  .split__intro { gap: 20px; }
+  .split__actions { align-items: center; gap: 20px; }
+  .programme .photo { aspect-ratio: 35 / 32; border-radius: var(--r-card); }
+  .programme .photo .tag { left: 16px; bottom: 16px; }
+  .programme { gap: 28px; }
+  .modules { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; grid-auto-flow: row; }
+  .modules li { gap: 16px; min-height: 0; padding: 18px 0; }
+  .modules li:nth-child(6n) { border-bottom: 0; }
+  .modules li:last-child { border-bottom: 1px solid var(--line); }
+  .cards { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .card { gap: 28px; min-height: 0; padding: 28px; }
+  .card__tile { width: 48px; height: 48px; border-radius: 14px; }
+
+  .panel { border-radius: var(--r-photo); }
+  .panel--paper { gap: 32px; padding: 44px 24px 28px; }
+  .panel--paper .photo { width: 100%; aspect-ratio: 302 / 200; border-radius: 20px; }
+  .stats { grid-template-columns: minmax(0, 1fr); row-gap: 0; }
+  .stats > div, .stats > div:first-child, .stats > div:nth-child(odd) { gap: 10px; padding: 22px 0; border-left: 0; border-top: 1px solid var(--line-ink); }
+
+  .steps { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .step { grid-template-columns: 44px minmax(0, 1fr); gap: 18px; }
+  .step__marker { flex-direction: column; gap: 8px; }
+  .step__num { width: 44px; height: 44px; }
+  .step__line { width: 1px; height: auto; --line-hidden: scaleY(0); }
+  .step:last-child .step__line { display: none; }
+  .step__body { gap: 10px; padding: 10px 0 36px; }
+  .step:last-child .step__body { padding-bottom: 0; }
+
+  .cases-head { grid-template-columns: minmax(0, 1fr); grid-template-areas: "head" "grid" "btn"; row-gap: 36px; }
+  .cases { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  .case { gap: 18px; }
+  .case .photo { aspect-ratio: 35 / 32; }
+  .case .photo .tag { top: 16px; left: 16px; }
+  .case__text { gap: 10px; padding-right: 0; }
+
+  .featured { gap: 28px; }
+  .featured figure { gap: 28px; }
+  .result { gap: 20px; padding: 24px; }
+  .voices { grid-template-columns: minmax(0, 1fr); gap: 16px; margin-top: 16px; }
+  .voices .card { min-height: 0; padding: 24px; }
+
+  .founder { gap: 36px; }
+  .founder .photo { width: 100%; aspect-ratio: 350 / 430; border-radius: var(--r-card); }
+  .founder__name { left: 16px; bottom: 16px; padding: 12px 16px; border-radius: 14px; }
+  .founder__text { gap: 22px; }
+  .facts { grid-template-columns: minmax(0, 1fr); gap: 0; padding-top: 0; }
+  .facts > div { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .facts .label { text-align: right; }
+  .founder__text .actions { width: 100%; flex-direction: column; margin-top: 10px; }
+
+  .faq { margin-top: 32px; }
+  .faq .acc__btn { padding: 20px 0; }
+
+  .panel--blue { gap: 36px; padding: 44px 24px 24px; }
+  .cta { gap: 24px; }
+  .cta .actions { width: 100%; flex-direction: column; }
+  .booking { width: 100%; gap: 16px; padding: 20px; border-radius: 20px; }
+  .cal__nav button { width: 36px; height: 36px; }
+  .cal__wd span { height: 28px; }
+  .cal__day { height: 38px; }
+  .cal__day span { width: 34px; height: 34px; }
+  .slots { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .booking .btn { justify-self: stretch; }
+
+  .site-footer__top { flex-direction: column; gap: 36px; }
+  .site-footer__brand { max-width: none; gap: 18px; }
+  .site-footer__cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 24px; }
+  .site-footer__cols li + li { margin-top: 14px; }
+  .legal { flex-direction: column; margin-top: 36px; padding-top: 20px; }
+  .wordmark { margin-top: 36px; }
+}
+
+/* ---------- Reduced motion and print ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .btn__disc, .photo img, .pm::after, .wave i, .w__i { transition: none; }
+  .btn:hover .btn__disc, .photo--zoom:hover img { transform: none; }
+  .mobile-menu:not([hidden]), .acc__panel:not([hidden]) { animation: fade-in 100ms both; }
+}
+@media print {
+  .motion [data-reveal], .motion [data-reveal] img, .motion .w__i, .motion .wave i { opacity: 1 !important; transform: none !important; }
+  .site-header { position: static; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="logo-mark" viewBox="0 0 44 44"><circle cx="22" cy="22" r="22" fill="#2F5BFF" stroke="none"/><path d="M28.6 15.3a9.4 9.4 0 1 0 0 13.4" fill="none" stroke="#fff" stroke-width="4.4" stroke-linecap="round"/><circle cx="30.2" cy="22" r="2.7" fill="#FF6B3D" stroke="none"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M9 6v12l10-6z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M5 8.5h14M5 15.5h14"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></symbol>
+    <symbol id="i-prev" viewBox="0 0 24 24"><path d="M14 6l-6 6 6 6"/></symbol>
+    <symbol id="i-next" viewBox="0 0 24 24"><path d="M10 6l6 6-6 6"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="m8.5 12 2.5 2.5 4.5-5"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.5 4h3l1.5 4-2 1.5a11 11 0 0 0 5.5 5.5L16 13l4 1.5v3a2 2 0 0 1-2.2 2A16 16 0 0 1 4.5 6.2 2 2 0 0 1 6.5 4Z"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="9.5" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></symbol>
+    <symbol id="i-bars" viewBox="0 0 24 24"><path d="M5 19v-8M10 19V5M15 19v-6M20 19V8"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-5.6-6.5-10.5a6.5 6.5 0 0 1 13 0C18.5 15.4 12 21 12 21Z"/><circle cx="12" cy="10.5" r="2.3"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M5 5.5A1.5 1.5 0 0 1 6.5 4H19v13H6.5A1.5 1.5 0 0 0 5 18.5v-13Z"/><path d="M5 18.5A1.5 1.5 0 0 0 6.5 20H19"/></symbol>
+    <symbol id="l-halden" viewBox="0 0 24 24"><path d="M5 7l7 5-7 5M12 7l7 5-7 5"/></symbol>
+    <symbol id="l-brightwater" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M4 12h16M12 4v16"/></symbol>
+    <symbol id="l-kestrel" viewBox="0 0 24 24"><path d="M12 5l8 14H4z"/></symbol>
+    <symbol id="l-orbit" viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9" ry="4.5"/><circle cx="12" cy="12" r="2" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="l-marlow" viewBox="0 0 24 24"><path d="M5 18V6l7 7 7-7v12"/></symbol>
+  </defs>
+</svg>
+
+<div class="page">
+<div class="glow" aria-hidden="true" data-reveal="fade"></div>
+
+<header class="site-header">
+  <div class="wrap site-header__in">
+    <a class="logo" href="#top" aria-label="Callside, back to top"><svg aria-hidden="true"><use href="#logo-mark"/></svg>Callside</a>
+    <nav class="nav" aria-label="Main">
+      <a href="#programme">Programme</a>
+      <a href="#system">System</a>
+      <a href="#results">Results</a>
+      <a href="#founder">Founder</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="btn btn--nav nav-cta" href="#book">Book a strategy call</a>
+    <button class="icon-btn menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+      <svg class="ico ico--18 ico--menu" aria-hidden="true"><use href="#i-menu"/></svg>
+      <svg class="ico ico--18 ico--close" aria-hidden="true"><use href="#i-close"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile" hidden>
+    <a class="h3" href="#programme">Programme</a>
+    <a class="h3" href="#system">System</a>
+    <a class="h3" href="#results">Results</a>
+    <a class="h3" href="#founder">Founder</a>
+    <a class="h3" href="#faq">FAQ</a>
+    <a class="btn btn--primary" href="#book">Book a strategy call <span class="btn__disc"><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
+  </nav>
+</header>
+
+<main id="main" tabindex="-1">
+
+<!-- 01 Hero -->
+<section class="hero wrap" id="top">
+  <div class="hero__head">
+    <p class="eyebrow label" data-reveal><span>Sales team training<span class="only-d">, one team per industry</span></span></p>
+    <h1 class="display" data-reveal="words">Train your sales team<br class="br-d"> on live calls, <span class="accent">not slides.</span></h1>
+  </div>
+  <div class="hero__intro">
+    <div class="hero__copy">
+      <p class="lead" data-reveal>Tired of a team that is not really performing, even after all the time you have put into every rep? Callside coaches B2B sales teams on real calls to real prospects, and works with only one team per industry.</p>
+      <div class="hero__actions" data-reveal>
+        <a class="btn btn--primary" href="#book">Book a strategy call <span class="btn__disc"><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
+        <a class="btn btn--play" href="#" data-placeholder="video"><span class="btn__disc"><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg></span> Watch the 2-minute intro</a>
+      </div>
+      <p class="status body" id="video-status" role="status" hidden>The intro video is not connected yet.</p>
+    </div>
+    <div class="proof body" data-reveal>
+      <div class="proof__faces" aria-hidden="true">
+        <img src="assets/avatar-sarah.jpg" alt="" width="48" height="48"><img src="assets/avatar-tom.jpg" alt="" width="48" height="48"><img src="assets/avatar-maya.jpg" alt="" width="48" height="48"><img src="assets/avatar-daniel.jpg" alt="" width="48" height="48">
+      </div>
+      <p>Trusted by 40+ sales teams<br class="br-d"> since 2006</p>
+    </div>
+  </div>
+  <div class="hero__media photo" data-reveal="photo">
+    <picture>
+      <source media="(max-width: 720px)" srcset="assets/hero-tall.jpg">
+      <img src="assets/hero-wide.jpg" alt="Sales team at work in an open-plan office" width="1920" height="900">
+    </picture>
+    <span class="tag label">Training day, London</span>
+    <div class="live glass" data-reveal data-delay="260">
+      <div class="live__top"><span class="note label">Live call</span><span class="label dim">04:12</span></div>
+      <p class="h4">Daniel Hart is calling a real prospect</p>
+      <div class="wave" aria-hidden="true"></div>
+    </div>
+    <div class="hero-stat glass" data-reveal data-delay="260">
+      <p class="h2"><span class="sr-only">+38%</span><span aria-hidden="true" data-count="38" data-prefix="+" data-suffix="%">+38%</span></p>
+      <p class="body">average close-rate lift after 90 days</p>
+    </div>
+  </div>
+</section>
+
+<!-- 02 Clients -->
+<section class="clients wrap" aria-label="Clients">
+  <p class="clients__label body" data-reveal>Trusted with the sales teams of</p>
+  <ul class="logos">
+    <li data-reveal><svg class="ico ico--24" aria-hidden="true"><use href="#l-halden"/></svg><span class="l1">halden</span></li>
+    <li data-reveal><svg class="ico ico--24" aria-hidden="true"><use href="#l-brightwater"/></svg><span class="l2">Brightwater</span></li>
+    <li data-reveal><svg class="ico ico--24" aria-hidden="true"><use href="#l-kestrel"/></svg><span class="l3">KESTREL</span></li>
+    <li data-reveal><svg class="ico ico--24" aria-hidden="true"><use href="#l-orbit"/></svg><span class="l4">orbit systems</span></li>
+    <li data-reveal><svg class="ico ico--24" aria-hidden="true"><use href="#l-marlow"/></svg><span class="l5">Marlow &amp; Finch</span></li>
+  </ul>
+</section>
+
+<!-- 03 Questions -->
+<section class="sec wrap" aria-labelledby="questions-title">
+  <div class="split">
+    <div class="split__intro">
+      <p class="eyebrow label" data-reveal>Sound familiar?</p>
+      <h2 class="h1" id="questions-title" data-reveal="words">You probably have questions <span class="accent">like these.</span></h2>
+      <p class="body-l" data-reveal>If you lead a sales team, you have likely asked at least one of them this quarter. Could you have asked several?</p>
+    </div>
+    <div class="split__actions" data-reveal>
+      <a class="btn btn--primary btn--wide" href="#book">Book a strategy call <span class="btn__disc"><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
+      <span class="note label">One sales team per industry</span>
+    </div>
+    <div class="split__list">
+      <div class="acc" data-reveal>
+        <h3><button class="acc__btn" type="button" id="q1" aria-expanded="false" aria-controls="q1p"><span class="label num">01</span><span class="h3">Why do so many leads go quiet after the first call?</span><span class="icon-btn" aria-hidden="true"><span class="pm"></span></span></button></h3>
+        <div class="acc__panel has-num body-l" id="q1p" role="region" aria-labelledby="q1" hidden><p>Most first calls end with “I’ll send you something”. We train your reps to agree a dated next step before they hang up, so the lead has a reason to pick up again.</p></div>
+      </div>
+      <div class="acc" data-reveal>
+        <h3><button class="acc__btn" type="button" id="q2" aria-expanded="false" aria-controls="q2p"><span class="label num">02</span><span class="h3">Why are there so many no-shows?</span><span class="icon-btn" aria-hidden="true"><span class="pm"></span></span></button></h3>
+        <div class="acc__panel has-num body-l" id="q2p" role="region" aria-labelledby="q2" hidden><p>Appointments get booked before the prospect sees a reason to turn up. A tighter setting script and a short confirmation sequence fix most of it.</p></div>
+      </div>
+      <div class="acc" data-reveal>
+        <h3><button class="acc__btn" type="button" id="q3" aria-expanded="false" aria-controls="q3p"><span class="label num">03</span><span class="h3">Why does only one rep hit target every month?</span><span class="icon-btn" aria-hidden="true"><span class="pm"></span></span></button></h3>
+        <div class="acc__panel has-num body-l" id="q3p" role="region" aria-labelledby="q3" hidden><p>That rep sells on instinct and nobody has written down what they do. We turn it into a call structure the whole team can follow.</p></div>
+      </div>
+      <div class="acc" data-reveal>
+        <h3><button class="acc__btn" type="button" id="q4" aria-expanded="false" aria-controls="q4p"><span class="label num">04</span><span class="h3">Why do deals stall at “send me a proposal”?</span><span class="icon-btn" aria-hidden="true"><span class="pm"></span></span></button></h3>
+        <div class="acc__panel has-num body-l" id="q4p" role="region" aria-labelledby="q4" hidden><p>A proposal request is often a polite way to end the call. Your reps learn to agree the price on the call and send the proposal only to confirm it.</p></div>
+      </div>
+      <div class="acc" data-reveal>
+        <h3><button class="acc__btn" type="button" id="q5" aria-expanded="false" aria-controls="q5p"><span class="label num">05</span><span class="h3">Why does every objection end in a discount?</span><span class="icon-btn" aria-hidden="true"><span class="pm"></span></span></button></h3>
+        <div class="acc__panel has-num body-l" id="q5p" role="region" aria-labelledby="q5" hidden><p>Reps discount when they have no answer ready. Product-specific objection handling gives them one for each objection they hear.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 Programme -->
+<section class="sec wrap" id="programme" aria-labelledby="programme-title">
+  <div class="sec-head">
+    <div class="sec-head__main">
+      <p class="eyebrow label" data-reveal>Programme</p>
+      <h2 class="h1" id="programme-title" data-reveal="words">No off-the-shelf training.<br class="br-d"> <span class="accent">You choose the modules.</span></h2>
+    </div>
+    <p class="sec-head__side body-l" data-reveal>As managing director or head of sales, you pick what your team needs most right now. We build the programme around it and around your product.</p>
+  </div>
+  <div class="programme sec-body">
+    <div class="photo photo--zoom" data-reveal="photo">
+      <img src="assets/workshop.jpg" alt="Coach writing on a whiteboard during a team workshop" width="880" height="830" loading="lazy" decoding="async">
+      <span class="tag label">Built around your team</span>
+    </div>
+    <ol class="modules">
+      <li data-reveal><span class="label">01</span><span class="h4">Sales process tune-up across prospecting, setting and closing</span></li>
+      <li data-reveal><span class="label">02</span><span class="h4">Product-specific objection handling</span></li>
+      <li data-reveal><span class="label">03</span><span class="h4">Done-for-you live calls to your prospects</span></li>
+      <li data-reveal><span class="label">04</span><span class="h4">The core skills of systematic selling</span></li>
+      <li data-reveal><span class="label">05</span><span class="h4">Private leadership channel with Daniel Hart</span></li>
+      <li data-reveal><span class="label">06</span><span class="h4">Clearing call reluctance and mental blocks</span></li>
+      <li data-reveal><span class="label">07</span><span class="h4">KPI analysis of your whole sales team</span></li>
+      <li data-reveal><span class="label">08</span><span class="h4">Feedback on your reps’ recorded calls</span></li>
+      <li data-reveal><span class="label">09</span><span class="h4">Negotiation talent check for every rep</span></li>
+      <li data-reveal><span class="label">10</span><span class="h4">Live calls for leaders and for reps</span></li>
+      <li data-reveal><span class="label">11</span><span class="h4">In-person intensives in Lisbon</span></li>
+      <li data-reveal><span class="label">12</span><span class="h4">Hiring scorecards for your next sales hire</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 05 System -->
+<section class="sec wrap" id="system" aria-labelledby="system-title">
+  <div class="sec-head sec-head--center">
+    <div class="sec-head__main">
+      <p class="eyebrow label" data-reveal>The Callside system</p>
+      <h2 class="h1" id="system-title" data-reveal="words">What clients value most<br class="br-d"> <span class="accent">about how we work.</span></h2>
+    </div>
+  </div>
+  <div class="cards sec-body">
+    <article class="card" data-reveal="card">
+      <div class="card__top"><span class="card__tile"><svg class="ico ico--24" aria-hidden="true"><use href="#i-check"/></svg></span><span class="label">01</span></div>
+      <div class="card__text"><h3 class="h3">An accredited sales qualification</h3><p class="body">Your reps finish with a recognised qualification. You get the best of sales training without taking them off the phones for months.</p></div>
+    </article>
+    <article class="card" data-reveal="card">
+      <div class="card__top"><span class="card__tile"><svg class="ico ico--24" aria-hidden="true"><use href="#i-phone"/></svg></span><span class="label">02</span></div>
+      <div class="card__text"><h3 class="h3">A founder who goes first</h3><p class="body">Daniel personally shows your team every stage on live calls, whether it is a cold opening, an appointment or the close.</p></div>
+    </article>
+    <article class="card card--blue" data-reveal="card">
+      <div class="card__top"><span class="card__tile"><svg class="ico ico--24" aria-hidden="true"><use href="#i-lock"/></svg></span><span class="label">03</span></div>
+      <div class="card__text"><h3 class="h3">One sales team per industry</h3><p class="body">Nobody else in your market gets the same know-how. Once you are in, your industry is closed to everyone else.</p></div>
+    </article>
+    <article class="card" data-reveal="card">
+      <div class="card__top"><span class="card__tile"><svg class="ico ico--24" aria-hidden="true"><use href="#i-bars"/></svg></span><span class="label">04</span></div>
+      <div class="card__text"><h3 class="h3">Assessment tools built on research</h3><p class="body">You see in black and white where each rep is strong and where your deals are being lost, even when the answer is uncomfortable.</p></div>
+    </article>
+    <article class="card" data-reveal="card">
+      <div class="card__top"><span class="card__tile"><svg class="ico ico--24" aria-hidden="true"><use href="#i-pin"/></svg></span><span class="label">05</span></div>
+      <div class="card__text"><h3 class="h3">In-person intensives in Lisbon</h3><p class="body">Two days with Daniel and the coaching team to drill what was learned until it holds on real calls.</p></div>
+    </article>
+    <article class="card" data-reveal="card">
+      <div class="card__top"><span class="card__tile"><svg class="ico ico--24" aria-hidden="true"><use href="#i-book"/></svg></span><span class="label">06</span></div>
+      <div class="card__text"><h3 class="h3">Your own argumentation playbook</h3><p class="body">A sales playbook written for your product and your market. With it, even an average rep can sell above their level.</p></div>
+    </article>
+  </div>
+</section>
+
+<!-- 06 Results -->
+<section class="sec wrap wrap--panel" id="results" aria-labelledby="results-title">
+  <div class="panel panel--paper" data-reveal="card">
+    <div class="sec-head">
+      <div class="sec-head__main">
+        <p class="eyebrow eyebrow--light label" data-reveal>Results</p>
+        <h2 class="h1" id="results-title" data-reveal="words">The numbers<br class="br-d"> <span class="accent">after ninety days.</span></h2>
+        <p class="body-l" data-reveal>Averages across client teams in their first 90 days of training.</p>
+      </div>
+      <div class="photo" data-reveal="photo">
+        <img src="assets/results.jpg" alt="Team celebrating around a laptop" width="1000" height="894" loading="lazy" decoding="async">
+      </div>
+    </div>
+    <div class="stats">
+      <div data-reveal>
+        <p class="label">Close rate</p>
+        <p class="stat"><span class="sr-only">+38%</span><span aria-hidden="true" data-count="38" data-prefix="+" data-suffix="%">+38%</span></p>
+        <p class="body">average lift in close rate across client teams</p>
+      </div>
+      <div data-reveal>
+        <p class="label">No-shows</p>
+        <p class="stat"><span class="sr-only">−46%</span><span aria-hidden="true" data-count="46" data-prefix="−" data-suffix="%">−46%</span></p>
+        <p class="body">fewer no-shows on booked appointments</p>
+      </div>
+      <div data-reveal>
+        <p class="label">Ramp time</p>
+        <p class="stat"><span class="sr-only">9 wks</span><span aria-hidden="true" data-count="9" data-suffix=" wks">9 wks</span></p>
+        <p class="body">for a new rep to reach quota, down from six months</p>
+      </div>
+      <div data-reveal>
+        <p class="label">Exclusivity</p>
+        <p class="stat">1</p>
+        <p class="body">sales team per industry. No exceptions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 Process -->
+<section class="sec wrap" id="how" aria-labelledby="how-title">
+  <div class="sec-head">
+    <div class="sec-head__main">
+      <p class="eyebrow label" data-reveal>How it works</p>
+      <h2 class="h1" id="how-title" data-reveal="words">From first call<br class="br-d"> <span class="accent">to numbers that hold.</span></h2>
+    </div>
+    <p class="sec-head__side body-l" data-reveal>Four steps, usually ten to twelve weeks from the first conversation to results you can measure.</p>
+  </div>
+  <ol class="steps sec-body">
+    <li class="step" data-reveal>
+      <div class="step__marker"><span class="step__num label">01</span><span class="step__line" data-reveal="line"></span></div>
+      <div class="step__body"><p class="label">30 minutes</p><h3 class="h3">Strategy call</h3><p class="body">A short call with Daniel. We check whether your industry is still open and whether we are the right fit for your team.</p></div>
+    </li>
+    <li class="step" data-reveal>
+      <div class="step__marker"><span class="step__num label">02</span><span class="step__line" data-reveal="line"></span></div>
+      <div class="step__body"><p class="label">Week 1</p><h3 class="h3">Team diagnostic</h3><p class="body">KPI analysis, call reviews and a negotiation talent check for every rep show exactly where deals are being lost.</p></div>
+    </li>
+    <li class="step step--now" data-reveal>
+      <div class="step__marker"><span class="step__num label">03</span><span class="step__line" data-reveal="line"></span></div>
+      <div class="step__body"><p class="label">Weeks 2 to 8</p><h3 class="h3">Live training</h3><p class="body">Your chosen modules, taught on real calls to your real prospects, online or in person with the whole team.</p></div>
+    </li>
+    <li class="step" data-reveal>
+      <div class="step__marker"><span class="step__num label">04</span><span class="step__line" data-reveal="line"></span></div>
+      <div class="step__body"><p class="label">Ongoing</p><h3 class="h3">Coaching and KPIs</h3><p class="body">Weekly call feedback, a leadership channel with Daniel and KPI tracking until the new numbers hold.</p></div>
+    </li>
+  </ol>
+</section>
+
+<!-- 08 Case studies -->
+<section class="sec wrap" id="cases" aria-labelledby="cases-title">
+  <div class="cases-head">
+    <div class="sec-head__main">
+      <p class="eyebrow label" data-reveal>Case studies</p>
+      <h2 class="h1" id="cases-title" data-reveal="words">Three teams.<br class="br-d"> <span class="accent">Twelve weeks each.</span></h2>
+    </div>
+    <a class="btn btn--secondary btn--wide" href="#" data-placeholder data-reveal>All case studies</a>
+    <div class="cases">
+      <article class="case" data-reveal="card">
+        <div class="photo photo--zoom"><img src="assets/case-freight.jpg" alt="Forklift in a warehouse aisle" width="800" height="960" loading="lazy" decoding="async"><span class="tag label">Freight software</span></div>
+        <div class="case__text"><p class="label muted">Halden</p><h3 class="h3">Close rate from 18% to 31% in twelve weeks.</h3><p class="body">Eleven reps, one shared call structure and product-specific objection handling.</p></div>
+      </article>
+      <article class="case" data-reveal="card">
+        <div class="photo photo--zoom"><img src="assets/case-solar.jpg" alt="Rows of solar panels on a rooftop" width="800" height="960" loading="lazy" decoding="async"><span class="tag label">Commercial solar</span></div>
+        <div class="case__text"><p class="label muted">Brightwater</p><h3 class="h3">No-shows cut from four in ten to one in ten.</h3><p class="body">A new appointment-setting script and a confirmation sequence for the setter team.</p></div>
+      </article>
+      <article class="case" data-reveal="card">
+        <div class="photo photo--zoom"><img src="assets/case-insurance.jpg" alt="Team in discussion around a meeting table" width="800" height="960" loading="lazy" decoding="async"><span class="tag label">Business insurance</span></div>
+        <div class="case__text"><p class="label muted">Marlow &amp; Finch</p><h3 class="h3">New reps at quota in nine weeks, not six months.</h3><p class="body">A written playbook and live-call onboarding for every new hire.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 09 Testimonials -->
+<section class="sec wrap" id="testimonials" aria-labelledby="testimonials-title">
+  <div class="sec-head">
+    <div class="sec-head__main">
+      <p class="eyebrow label" data-reveal>Testimonials</p>
+      <h2 class="h1" id="testimonials-title" data-reveal="words">We would rather let<br class="br-d"> <span class="accent">our clients do the talking.</span></h2>
+    </div>
+  </div>
+  <div class="featured sec-body">
+    <figure>
+      <blockquote class="quote" data-reveal="words">“We stopped hoping the pipeline would close itself. Daniel called our prospects in front of the team, and it changed how they sell.”</blockquote>
+      <figcaption class="person" data-reveal><img class="avatar" src="assets/avatar-sarah.jpg" alt="" width="56" height="56" loading="lazy"><span><span class="h4">Sarah Lindqvist</span><span class="body dim">Managing Director, Halden</span></span></figcaption>
+    </figure>
+    <aside class="result" data-reveal="card" aria-label="Halden result">
+      <div class="result__top"><p class="h2">18% → 31%</p><p class="label accent">Close rate in twelve weeks</p></div>
+      <hr>
+      <dl>
+        <div><dt class="label">Starting point</dt><dd class="body">Eleven reps, plenty of demos and an 18% close rate.</dd></div>
+        <div><dt class="label">What changed</dt><dd class="body">One call structure for everyone and weekly feedback on recorded calls.</dd></div>
+      </dl>
+    </aside>
+  </div>
+  <div class="voices">
+    <figure class="card" data-reveal="card">
+      <blockquote class="h3">“Four in ten booked appointments never showed up. Within a month it was one in ten, with exactly the same leads.”</blockquote>
+      <figcaption class="person"><img class="avatar" src="assets/avatar-tom.jpg" alt="" width="56" height="56" loading="lazy"><span><span class="h4">Tom Becker</span><span class="body dim">Head of Sales, Brightwater</span></span></figcaption>
+    </figure>
+    <figure class="card" data-reveal="card">
+      <blockquote class="h3">“Our new hires used to need half a year. The playbook and the live calls got them to quota in nine weeks.”</blockquote>
+      <figcaption class="person"><img class="avatar" src="assets/avatar-elena.jpg" alt="" width="56" height="56" loading="lazy"><span><span class="h4">Elena Marsh</span><span class="body dim">Sales Director, Marlow &amp; Finch</span></span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- 10 Founder -->
+<section class="sec wrap" id="founder" aria-labelledby="founder-title">
+  <div class="founder">
+    <div class="photo" data-reveal="photo">
+      <img src="assets/founder.jpg" alt="Portrait of Daniel Hart" width="900" height="1286" loading="lazy" decoding="async">
+      <div class="founder__name glass"><p class="h4">Daniel Hart</p><p class="label">Founder, Callside</p></div>
+    </div>
+    <div class="founder__text">
+      <p class="eyebrow label" data-reveal>The founder</p>
+      <h2 class="h1" id="founder-title" data-reveal="words">If there is one thing he can do, <span class="accent">it is sell. And teach it.</span></h2>
+      <div class="prose body-l" data-reveal>
+        <p>Since 2006, Daniel has helped more than 32,000 people sell better, in seminars, through his online academy and from the stage.</p>
+        <p>He practises what he preaches. Whenever the chance comes up, he picks up the phone in front of the whole team to prove the technique works. Who is on the line and what the product is makes no difference to him.</p>
+      </div>
+      <p class="h3" data-reveal>Deals close where Daniel calls.</p>
+      <div class="facts" data-reveal>
+        <div><p class="h2">2006</p><p class="label">Training sales teams since</p></div>
+        <div><p class="h2"><span class="sr-only">32,000+</span><span aria-hidden="true" data-count="32000" data-suffix="+">32,000+</span></p><p class="label">People trained</p></div>
+        <div><p class="h2"><span class="sr-only">40+</span><span aria-hidden="true" data-count="40" data-suffix="+">40+</span></p><p class="label">Industries, one team in each</p></div>
+      </div>
+      <div class="actions" data-reveal>
+        <a class="btn btn--primary btn--wide" href="#book">Book a strategy call <span class="btn__disc"><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
+        <span class="note label">One sales team per industry</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 FAQ -->
+<section class="sec wrap" id="faq" aria-labelledby="faq-title">
+  <div class="sec-head sec-head--center">
+    <div class="sec-head__main">
+      <p class="eyebrow label" data-reveal>Questions</p>
+      <h2 class="h1" id="faq-title" data-reveal="words">Still have <span class="accent">open questions?</span></h2>
+    </div>
+  </div>
+  <div class="faq">
+    <div class="acc" data-reveal>
+      <h3><button class="acc__btn" type="button" id="f1" aria-expanded="true" aria-controls="f1p"><span class="h3">What does “one sales team per industry” mean in practice?</span><span class="icon-btn" aria-hidden="true"><span class="pm"></span></span></button></h3>
+      <div class="acc__panel body-l" id="f1p" role="region" aria-labelledby="f1"><p>Once we start working together, we do not train another sales team in your industry and region for as long as the engagement runs. The scripts, objection handling and playbook we develop with you stay yours.</p></div>
+    </div>
+    <div class="acc" data-reveal>
+      <h3><button class="acc__btn" type="button" id="f2" aria-expanded="false" aria-controls="f2p"><span class="h3">How much time does my team need each week?</span><span class="icon-btn" aria-hidden="true"><span class="pm"></span></span></button></h3>
+      <div class="acc__panel body-l" id="f2p" role="region" aria-labelledby="f2" hidden><p>Plan for about three hours per rep: one live session and one block of calls with feedback. Leaders add a 30-minute weekly review.</p></div>
+    </div>
+    <div class="acc" data-reveal>
+      <h3><button class="acc__btn" type="button" id="f3" aria-expanded="false" aria-controls="f3p"><span class="h3">Is the training online or in person?</span><span class="icon-btn" aria-hidden="true"><span class="pm"></span></span></button></h3>
+      <div class="acc__panel body-l" id="f3p" role="region" aria-labelledby="f3" hidden><p>Both. The weekly sessions run online, and the intensives take place in person in Lisbon or at your office.</p></div>
+    </div>
+    <div class="acc" data-reveal>
+      <h3><button class="acc__btn" type="button" id="f4" aria-expanded="false" aria-controls="f4p"><span class="h3">Our product is complex. Will your method still fit?</span><span class="icon-btn" aria-hidden="true"><span class="pm"></span></span></button></h3>
+      <div class="acc__panel body-l" id="f4p" role="region" aria-labelledby="f4" hidden><p>Yes. The objection handling and the playbook are written for your product, and Daniel makes live calls for it before he trains anyone else to.</p></div>
+    </div>
+    <div class="acc" data-reveal>
+      <h3><button class="acc__btn" type="button" id="f5" aria-expanded="false" aria-controls="f5p"><span class="h3">How soon will we see results?</span><span class="icon-btn" aria-hidden="true"><span class="pm"></span></span></button></h3>
+      <div class="acc__panel body-l" id="f5p" role="region" aria-labelledby="f5" hidden><p>Most teams book more appointments within the first month. The figures on this page are averages after 90 days.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 12 Contact -->
+<section class="sec wrap wrap--panel" id="book" aria-labelledby="book-title">
+  <div class="panel panel--blue" data-reveal="card">
+    <div class="cta">
+      <p class="eyebrow eyebrow--on-blue label" data-reveal>Book a call</p>
+      <h2 class="display" id="book-title" data-reveal="words">Is your industry<br class="br-d"> <span class="soft">still open?</span></h2>
+      <p class="lead" data-reveal>Book a free 30-minute strategy call. We will tell you honestly whether your industry is still open and whether we can help.</p>
+      <div class="actions" data-reveal>
+        <a class="btn btn--primary btn--wide" href="#booking">Book a strategy call <span class="btn__disc"><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
+        <span class="note label">One sales team per industry</span>
+      </div>
+    </div>
+    <div class="booking" id="booking" data-reveal="card" data-delay="140">
+      <div class="booking__top">
+        <div><p class="label">Strategy call, 30 <span class="only-d">minutes</span><span class="only-m">min</span></p><p class="h3" id="cal-month" aria-live="polite">December 2026</p></div>
+        <div class="cal__nav">
+          <button type="button" id="cal-prev" aria-label="Previous month"><svg class="ico" aria-hidden="true"><use href="#i-prev"/></svg></button>
+          <button type="button" id="cal-next" aria-label="Next month"><svg class="ico" aria-hidden="true"><use href="#i-next"/></svg></button>
+        </div>
+      </div>
+      <div class="cal">
+        <div class="cal__wd label" id="cal-wd" aria-hidden="true"></div>
+        <div class="cal__grid" id="cal-grid"></div>
+      </div>
+      <hr>
+      <div class="booking__times">
+        <p class="label" id="cal-date">Thursday 10 December, London time</p>
+        <div class="slots" role="group" aria-labelledby="cal-date">
+          <button class="slot" type="button" aria-pressed="false">09:30</button>
+          <button class="slot" type="button" aria-pressed="true">11:00</button>
+          <button class="slot" type="button" aria-pressed="false">14:00</button>
+          <button class="slot" type="button" aria-pressed="false">16:30</button>
+        </div>
+      </div>
+      <button class="btn btn--dark" type="button" id="cal-confirm"><span id="cal-confirm-label">Confirm 11:00</span> <span class="btn__disc"><svg class="ico" aria-hidden="true"><use href="#i-arrow"/></svg></span></button>
+      <p class="booking__status body" id="cal-status" role="status" hidden></p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="site-footer__top">
+      <div class="site-footer__brand body-l" data-reveal>
+        <a class="logo" href="#top" aria-label="Callside, back to top"><svg aria-hidden="true"><use href="#logo-mark"/></svg>Callside</a>
+        <p>Sales team training on live calls. One sales team per industry.</p>
+      </div>
+      <div class="site-footer__cols body-l">
+        <nav aria-label="Programme" data-reveal>
+          <h3 class="label">Programme</h3>
+          <ul><li><a href="#programme">Modules</a></li><li><a href="#system">The system</a></li><li><a href="#how">How it works</a></li><li><a href="#results">Results</a></li></ul>
+        </nav>
+        <nav aria-label="Company" data-reveal>
+          <h3 class="label">Company</h3>
+          <ul><li><a href="#founder">Founder</a></li><li><a href="#cases">Case studies</a></li><li><a href="#testimonials">Testimonials</a></li><li><a href="#faq">FAQ</a></li></ul>
+        </nav>
+        <div data-reveal>
+          <h3 class="label">Contact</h3>
+          <ul><li>hello@callside.example</li><li>+44 20 7946 0000</li><li>London and Lisbon</li></ul>
+        </div>
+      </div>
+    </div>
+    <div class="legal body" data-reveal>
+      <p>© 2026 Callside Ltd. All rights reserved.</p>
+      <ul><li><a href="#" data-placeholder>Imprint</a></li><li><a href="#" data-placeholder>Privacy</a></li><li><a href="#" data-placeholder>Terms</a></li></ul>
+    </div>
+    <p class="wordmark" aria-hidden="true" data-reveal>Callside</p>
+  </div>
+</footer>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var root = document.documentElement;
+  var motion = root.classList.contains('motion');
+  var mq = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+  function $(s, c) { return (c || document).querySelector(s); }
+  function $$(s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); }
+  function reduced() { return !!(mq && mq.matches); }
+  function finishCounts() { $$('[data-final]').forEach(function (c) { c.textContent = c.getAttribute('data-final'); }); }
+
+  try {
+    /* ----- Waveform bars in the live-call card ----- */
+    var BARS = [10, 18, 26, 14, 30, 38, 22, 12, 28, 36, 40, 24, 16, 32, 20, 34, 26, 12, 22, 36, 30, 18, 10, 24, 34, 28, 16, 22, 38, 26, 14, 30, 20, 12, 24, 32, 18, 10, 16, 8, 12, 8, 6];
+    $$('.wave').forEach(function (w) {
+      BARS.forEach(function (h, i) {
+        var b = document.createElement('i');
+        b.style.height = h + 'px';
+        b.style.setProperty('--i', i);
+        if (i > 17 && i < 24) b.className = 'is-signal'; else if (i > 25) b.className = 'is-dim';
+        w.appendChild(b);
+      });
+    });
+
+    /* ----- Entrance motion ----- */
+    var io = null;
+    var STEP = 70;
+
+    /* Wrap each word of a headline so it can rise out of a mask. */
+    function split(el) {
+      var label = el.textContent.replace(/\s+/g, ' ').trim();
+      var n = 0;
+      (function walk(node) {
+        Array.prototype.slice.call(node.childNodes).forEach(function (child) {
+          if (child.nodeType === 3) {
+            var frag = document.createDocumentFragment();
+            child.nodeValue.split(/(\s+)/).forEach(function (part) {
+              if (!part) return;
+              if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(' ')); return; }
+              var outer = document.createElement('span');
+              var inner = document.createElement('span');
+              outer.className = 'w';
+              inner.className = 'w__i';
+              inner.textContent = part;
+              inner.style.setProperty('--i', n++);
+              outer.appendChild(inner);
+              frag.appendChild(outer);
+            });
+            node.replaceChild(frag, child);
+          } else if (child.nodeType === 1 && child.tagName !== 'BR') {
+            walk(child);
+          }
+        });
+      })(el);
+      if (/^H[1-6]$/.test(el.tagName)) el.setAttribute('aria-label', label);
+      el.setAttribute('data-words', n);
+      el.style.setProperty('--ws', Math.max(16, Math.min(45, Math.round(420 / n))) + 'ms');
+      el.classList.add('is-split');
+    }
+
+    function countUp(el, delay) {
+      var to = +el.getAttribute('data-count');
+      var pre = el.getAttribute('data-prefix') || '';
+      var suf = el.getAttribute('data-suffix') || '';
+      var start = null;
+      function frame(t) {
+        if (!root.classList.contains('motion')) { el.textContent = el.getAttribute('data-final'); return; }
+        if (start === null) start = t + delay;
+        var p = Math.min(1, Math.max(0, (t - start) / 1500));
+        el.textContent = pre + Math.round(to * (1 - Math.pow(1 - p, 4))).toLocaleString('en-GB') + suf;
+        if (p < 1) requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    }
+
+    function show(el, delay) {
+      var kind = el.getAttribute('data-reveal');
+      var total = kind === 'words' ? 950 + (+el.getAttribute('data-words') || 0) * 45
+        : kind === 'photo' ? 1350
+        : kind === 'line' ? 1050
+        : el.querySelector('.wave') ? 1900 : 780;
+      $$('[data-count]', el).forEach(function (c) {
+        if (c.closest('[data-reveal]') === el) countUp(c, delay + 150);
+      });
+      el.style.setProperty('--d', delay + 'ms');
+      el.classList.add('is-in');
+      setTimeout(function () { el.removeAttribute('data-reveal'); el.classList.remove('is-in'); }, delay + total + 100);
+    }
+
+    if (motion) {
+      $$('[data-reveal="words"]').forEach(split);
+      $$('[data-count]').forEach(function (c) {
+        c.setAttribute('data-final', c.textContent);
+        c.textContent = (c.getAttribute('data-prefix') || '') + '0' + (c.getAttribute('data-suffix') || '');
+      });
+      io = new IntersectionObserver(function (entries) {
+        var n = 0;
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          io.unobserve(entry.target);
+          show(entry.target, Math.min(n++, 9) * STEP + (parseInt(entry.target.getAttribute('data-delay'), 10) || 0));
+        });
+      }, { threshold: 0, rootMargin: '0px 0px -6% 0px' });
+      $$('[data-reveal]').forEach(function (el) { io.observe(el); });
+    }
+
+    /* If the visitor switches to reduced motion while the page is open, show everything at once. */
+    if (mq) {
+      var onMotionChange = function (e) { if (e.matches) { root.classList.remove('motion'); finishCounts(); } };
+      if (mq.addEventListener) mq.addEventListener('change', onMotionChange); else if (mq.addListener) mq.addListener(onMotionChange);
+    }
+
+    /* ----- Header and mobile menu ----- */
+    var header = $('.site-header');
+    var menuBtn = $('.menu-btn');
+    var menu = $('#mobile-menu');
+    function setMenu(open) {
+      menu.hidden = !open;
+      menuBtn.setAttribute('aria-expanded', String(open));
+      menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      header.classList.toggle('is-open', open);
+    }
+    menuBtn.addEventListener('click', function () { setMenu(menu.hidden); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !menu.hidden) { setMenu(false); menuBtn.focus(); }
+    });
+    window.addEventListener('resize', function () { if (window.innerWidth > 960 && !menu.hidden) setMenu(false); });
+
+    function onScroll() {
+      header.classList.toggle('is-stuck', window.scrollY > 8);
+      /* At the very end of the page, show anything the observer margin could have missed. */
+      if (io && root.classList.contains('motion') && window.innerHeight + window.scrollY >= root.scrollHeight - 2) {
+        $$('[data-reveal]:not(.is-in)').forEach(function (el, i) { io.unobserve(el); show(el, Math.min(i, 6) * STEP); });
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    /* ----- In-page links ----- */
+    var grid = $('#cal-grid');
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest ? e.target.closest('a[href^="#"]') : null;
+      if (!a) return;
+      e.preventDefault();
+      if (a.hasAttribute('data-placeholder')) {
+        if (a.getAttribute('data-placeholder') === 'video') $('#video-status').hidden = false;
+        return;
+      }
+      var id = a.getAttribute('href').slice(1);
+      var target = document.getElementById(id);
+      if (!target) return;
+      setMenu(false);
+      var behavior = reduced() ? 'auto' : 'smooth';
+      if (id === 'top') window.scrollTo({ top: 0, behavior: behavior });
+      else target.scrollIntoView({ behavior: behavior, block: 'start' });
+      if (id === 'main') target.focus({ preventScroll: true });
+      if (id === 'booking') { var sel = $('.cal__day.is-sel', grid); if (sel) sel.focus({ preventScroll: true }); }
+    });
+
+    /* ----- Accordions ----- */
+    $$('.acc__btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var open = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!open));
+        document.getElementById(btn.getAttribute('aria-controls')).hidden = open;
+      });
+    });
+
+    /* ----- Booking card (demo: nothing is sent anywhere) ----- */
+    var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    var DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    var cal = { y: 2026, m: 11, sel: new Date(2026, 11, 10), time: '11:00' };
+    var monthEl = $('#cal-month');
+    var dateEl = $('#cal-date');
+    var confirmLabel = $('#cal-confirm-label');
+    var statusEl = $('#cal-status');
+
+    $('#cal-wd').innerHTML = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(function (d) {
+      return '<span><b class="only-d">' + d + '</b><b class="only-m">' + d.charAt(0) + '</b></span>';
+    }).join('');
+
+    function sameDay(a, b) { return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate(); }
+    function longDate(d) { return DAYS[d.getDay()] + ' ' + d.getDate() + ' ' + MONTHS[d.getMonth()]; }
+
+    function renderCalendar() {
+      var offset = (new Date(cal.y, cal.m, 1).getDay() + 6) % 7;
+      var days = new Date(cal.y, cal.m + 1, 0).getDate();
+      var cells = Math.ceil((offset + days) / 7) * 7;
+      var html = '';
+      for (var i = 0; i < cells; i++) {
+        var d = new Date(cal.y, cal.m, i - offset + 1);
+        var out = d.getMonth() !== cal.m;
+        var weekend = d.getDay() === 0 || d.getDay() === 6;
+        var selected = !out && sameDay(d, cal.sel);
+        html += '<button type="button" class="cal__day' + (out ? ' is-out' : '') + (selected ? ' is-sel' : '') + '"' +
+          (out || weekend ? ' disabled' : ' data-day="' + d.getDate() + '" aria-pressed="' + selected + '" aria-label="' + longDate(d) + '"') +
+          '><span>' + d.getDate() + '</span></button>';
+      }
+      grid.innerHTML = html;
+      monthEl.textContent = MONTHS[cal.m] + ' ' + cal.y;
+    }
+    function renderChoice() {
+      dateEl.textContent = longDate(cal.sel) + ', London time';
+      confirmLabel.textContent = 'Confirm ' + cal.time;
+      statusEl.hidden = true;
+    }
+    function shiftMonth(by) {
+      var d = new Date(cal.y, cal.m + by, 1);
+      cal.y = d.getFullYear();
+      cal.m = d.getMonth();
+      renderCalendar();
+    }
+
+    grid.addEventListener('click', function (e) {
+      var day = e.target.closest('.cal__day[data-day]');
+      if (!day) return;
+      cal.sel = new Date(cal.y, cal.m, +day.getAttribute('data-day'));
+      renderCalendar();
+      renderChoice();
+      var sel = $('.cal__day.is-sel', grid);
+      if (sel) sel.focus();
+    });
+    $('#cal-prev').addEventListener('click', function () { shiftMonth(-1); });
+    $('#cal-next').addEventListener('click', function () { shiftMonth(1); });
+    $$('.slot').forEach(function (slot) {
+      slot.addEventListener('click', function () {
+        cal.time = slot.textContent.trim();
+        $$('.slot').forEach(function (other) { other.setAttribute('aria-pressed', String(other === slot)); });
+        renderChoice();
+      });
+    });
+    $('#cal-confirm').addEventListener('click', function () {
+      statusEl.textContent = 'This demo does not send bookings. Connect the card to your scheduling tool to confirm ' + longDate(cal.sel) + ' at ' + cal.time + '.';
+      statusEl.hidden = false;
+    });
+    renderCalendar();
+
+    /* ----- Footer wordmark: size it to the column, whichever font has loaded ----- */
+    var wordmark = $('.wordmark');
+    function fitWordmark() {
+      wordmark.style.fontSize = '';
+      var box = wordmark.parentNode.getBoundingClientRect().width - parseFloat(getComputedStyle(wordmark.parentNode).paddingLeft) * 2;
+      var range = document.createRange();
+      range.selectNodeContents(wordmark);
+      var text = range.getBoundingClientRect().width;
+      if (text > 0 && box > 0) wordmark.style.fontSize = (parseFloat(getComputedStyle(wordmark).fontSize) * box / text * 0.995) + 'px';
+    }
+    fitWordmark();
+    window.addEventListener('resize', fitWordmark);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitWordmark);
+
+    clearTimeout(window.__revealGuard);
+  } catch (err) {
+    /* Never leave content hidden because of a script error. */
+    root.classList.remove('motion');
+    finishCounts();
+    if (window.console) console.error(err);
+  }
+})();
+</script>
+</body>
+</html>
